@@ -35,7 +35,6 @@ const openModalLinks = document.querySelectorAll('[href="#contacto"]');
 const closeModal = document.getElementById('closeModal');
 const closeThankYou = document.getElementById('closeThankYou');
 
-// Open modal when clicking contact links
 openModalLinks.forEach(link => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
@@ -44,60 +43,53 @@ openModalLinks.forEach(link => {
   });
 });
 
-// Close modal
-closeModal.addEventListener('click', () => {
+closeModal?.addEventListener('click', () => {
   contactModal.style.display = 'none';
   document.body.style.overflow = 'auto';
 });
 
-closeThankYou.addEventListener('click', () => {
+closeThankYou?.addEventListener('click', () => {
   contactModal.style.display = 'none';
   document.body.style.overflow = 'auto';
 });
 
-// Close when clicking outside modal
-contactModal.addEventListener('click', (e) => {
+contactModal?.addEventListener('click', (e) => {
   if (e.target === contactModal) {
     contactModal.style.display = 'none';
     document.body.style.overflow = 'auto';
   }
 });
 
-// Form submission
 const contactForm = document.getElementById('contactForm');
 const modalForm = document.getElementById('modalForm');
 const thankYouMessage = document.getElementById('thankYouMessage');
 
-
- // ==== CAROUSEL ==== 
- 
+// ==== CAROUSEL ==== 
 document.addEventListener('DOMContentLoaded', () => {
-  const track = document.querySelector('.carousel-track');
   const slides = Array.from(document.querySelectorAll('.carousel-slide'));
-  const nextButton = document.querySelector('.next-btn');
-  const prevButton = document.querySelector('.prev-btn');
+  const nextButton = document.querySelector('button.next-btn');
+  const prevButton = document.querySelector('button.prev-btn');
   let currentSlide = 0;
   let slideInterval;
 
   function showSlide(index) {
     slides.forEach((slide, i) => {
       slide.classList.remove('active');
-      if (i === index) {
-        slide.classList.add('active');
-        restartProgressBar(slide);
-        track.style.transform = `translateX(-${index * 100}%)`;
-      }
     });
+    if (slides[index]) {
+      slides[index].classList.add('active');
+      restartProgressBar(slides[index]);
+    }
     currentSlide = index;
   }
 
   function nextSlide() {
-    let nextIndex = (currentSlide + 1) % slides.length;
+    const nextIndex = (currentSlide + 1) % slides.length;
     showSlide(nextIndex);
   }
 
   function prevSlide() {
-    let prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+    const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
     showSlide(prevIndex);
   }
 
@@ -113,34 +105,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const bar = slide.querySelector('.progress-bar');
     if (bar) {
       bar.classList.remove('animate');
-      void bar.offsetWidth; // Forzar reflow
+      void bar.offsetWidth;
       bar.classList.add('animate');
     }
   }
 
-  nextButton.addEventListener('click', () => {
+  nextButton?.addEventListener('click', () => {
     stopSlideInterval();
     nextSlide();
     startSlideInterval();
   });
 
-  prevButton.addEventListener('click', () => {
+  prevButton?.addEventListener('click', () => {
     stopSlideInterval();
     prevSlide();
     startSlideInterval();
   });
 
-  // Swipe support
   let startX = 0;
   let endX = 0;
-  track.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-  });
+  const track = document.querySelector('.carousel-track');
 
-  track.addEventListener('touchend', (e) => {
-    endX = e.changedTouches[0].clientX;
-    handleSwipe();
-  });
+  if(track) {
+    track.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    track.addEventListener('touchend', (e) => {
+      endX = e.changedTouches[0].clientX;
+      handleSwipe();
+    });
+  }
 
   function handleSwipe() {
     const threshold = 50;
@@ -155,7 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Inicializar
   showSlide(currentSlide);
   startSlideInterval();
 });

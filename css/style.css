@@ -1,4 +1,5 @@
 /* ==== STYLE.CSS ==== */
+/* ==== STYLE.CSS (MODIFICADO) ==== */
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 
 /* Base Reset */
@@ -167,6 +168,7 @@ body {
 }
 
 /* ==== CAROUSEL STYLES ==== */
+/* Carousel Styles Actualizado */
 .carousel-section {
   background-color: #f9f9f9;
   padding: 4rem 0;
@@ -181,12 +183,13 @@ body {
 }
 
 .carousel-track {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
 }
 
 .carousel-slide {
-  min-width: 100%;
+  display: none;
   opacity: 0;
   transition: opacity 0.6s ease-in-out;
   flex-shrink: 0;
@@ -194,12 +197,12 @@ body {
   justify-content: center;
   flex-direction: column;
   text-align: center;
+  background: #0D0D23;
+  color: #fff;
+  font-size: 1.05rem;
   padding: 2rem;
-  background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  color: #0D0D23;
-  font-size: 1.05rem;
 }
 
 .carousel-slide.active {
@@ -244,10 +247,10 @@ body {
   top: 0;
   left: 0;
   height: 100%;
+  background-color: #8B6FCB;
   width: 100%;
-  background-color: #8B6FCB
+  animation: progress 10s linear forwards;
 }
-
 
 @keyframes progress {
   from {
