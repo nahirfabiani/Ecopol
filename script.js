@@ -85,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (i === index) {
         slide.classList.add('active');
         restartProgressBar(slide);
+        track.style.transform = `translateX(-${index * 100}%)`;
       }
     });
     currentSlide = index;
