@@ -68,9 +68,6 @@ const contactForm = document.getElementById('contactForm');
 const modalForm = document.getElementById('modalForm');
 const thankYouMessage = document.getElementById('thankYouMessage');
 
-contactForm.addEventListener('submit', function(e) {
-  e.preventDefault();
-});
 
 // ==== CARRUSEL COMPLETO ====
 document.addEventListener('DOMContentLoaded', function() {
