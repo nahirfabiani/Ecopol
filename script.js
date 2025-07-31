@@ -29,40 +29,8 @@ gsap.from(".info-text", { opacity: 0, y: 20, delay: 2.8, duration: 1 });
 gsap.from(".team_img_wrapper img", { opacity: 0, y: 20, delay: 3, duration: 1 });
 gsap.from("#nosotros", { opacity: 0, y: 60, duration: 1.2, ease: "power2.out", delay: 0.5 });
 
-// Modal functionality
-const contactModal = document.getElementById('contactModal');
-const openModalLinks = document.querySelectorAll('[href="#contacto"]');
-const closeModal = document.getElementById('closeModal');
-const closeThankYou = document.getElementById('closeThankYou');
-
-openModalLinks.forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    contactModal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  });
-});
-
-closeModal?.addEventListener('click', () => {
-  contactModal.style.display = 'none';
-  document.body.style.overflow = 'auto';
-});
-
-closeThankYou?.addEventListener('click', () => {
-  contactModal.style.display = 'none';
-  document.body.style.overflow = 'auto';
-});
-
-contactModal?.addEventListener('click', (e) => {
-  if (e.target === contactModal) {
-    contactModal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-  }
-});
-
+// ==== FORMULARIO ==== 
 const contactForm = document.getElementById('contactForm');
-const modalForm = document.getElementById('modalForm');
-const thankYouMessage = document.getElementById('thankYouMessage');
 
 // ==== CAROUSEL ==== 
 document.addEventListener('DOMContentLoaded', () => {
