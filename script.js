@@ -69,128 +69,92 @@ const modalForm = document.getElementById('modalForm');
 const thankYouMessage = document.getElementById('thankYouMessage');
 
 
-// ==== CARRUSEL COMPLETO ====
-document.addEventListener('DOMContentLoaded', function() {
-  // Selección de elementos
+ // ==== CAROUSEL ==== 
+ 
+document.addEventListener('DOMContentLoaded', () => {
   const track = document.querySelector('.carousel-track');
-  const slides = document.querySelectorAll('.carousel-slide');
-  const nextBtn = document.querySelector('.next-btn');
-  const prevBtn = document.querySelector('.prev-btn');
-  
-  // Verificación de elementos
-  if (!track || slides.length === 0) {
-    console.error('Elementos del carrusel no encontrados');
-    return;
-  }
+  const slides = Array.from(document.querySelectorAll('.carousel-slide'));
+  const nextButton = document.querySelector('.next-btn');
+  const prevButton = document.querySelector('.prev-btn');
+  let currentSlide = 0;
+  let slideInterval;
 
-  // Variables de estado
-  let currentIndex = 0;
-  const slideCount = slides.length;
-  let intervalId;
-  const intervalDuration = 5000; // 5 segundos
-
-  // Inicialización del carrusel
-  function initCarousel() {
-    // Posicionar slides
-    slides.forEach((slide, index) => {
-      slide.style.transform = `translateX(${index * 100}%)`;
-    });
-    
-    // Activar primer slide
-    slides[0].classList.add('active');
-    resetProgressBar();
-  }
-
-  // Mover a slide específico
-  function goToSlide(index) {
-    // Asegurar que el índice esté dentro del rango
-    currentIndex = (index + slideCount) % slideCount;
-    
-    // Mover el track
-    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-    
-    // Actualizar clases activas
-    updateActiveSlide();
-  }
-
-  // Actualizar slide activo
-  function updateActiveSlide() {
+  function showSlide(index) {
     slides.forEach((slide, i) => {
-      slide.classList.toggle('active', i === currentIndex);
+      slide.classList.remove('active');
+      if (i === index) {
+        slide.classList.add('active');
+        restartProgressBar(slide);
+      }
     });
-    resetProgressBar();
+    currentSlide = index;
   }
 
-  // Reiniciar barra de progreso
-  function resetProgressBar() {
-    const activeSlide = document.querySelector('.carousel-slide.active');
-    if (!activeSlide) return;
-    
-    const progressBar = activeSlide.querySelector('.progress-bar');
-    if (progressBar) {
-      progressBar.style.animation = 'none';
-      void progressBar.offsetWidth; // Forzar reflow
-      progressBar.style.animation = 'progress 5s linear forwards';
+  function nextSlide() {
+    let nextIndex = (currentSlide + 1) % slides.length;
+    showSlide(nextIndex);
+  }
+
+  function prevSlide() {
+    let prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(prevIndex);
+  }
+
+  function startSlideInterval() {
+    slideInterval = setInterval(nextSlide, 10000);
+  }
+
+  function stopSlideInterval() {
+    clearInterval(slideInterval);
+  }
+
+  function restartProgressBar(slide) {
+    const bar = slide.querySelector('.progress-bar');
+    if (bar) {
+      bar.classList.remove('animate');
+      void bar.offsetWidth; // Forzar reflow
+      bar.classList.add('animate');
     }
   }
 
-  // Slide siguiente
-  function nextSlide() {
-    goToSlide(currentIndex + 1);
-  }
-
-  // Slide anterior
-  function prevSlide() {
-    goToSlide(currentIndex - 1);
-  }
-
-  // Iniciar auto-desplazamiento
-  function startAutoSlide() {
-    clearInterval(intervalId);
-    intervalId = setInterval(nextSlide, intervalDuration);
-  }
-
-  // Detener auto-desplazamiento
-  function stopAutoSlide() {
-    clearInterval(intervalId);
-  }
-
-  // Event listeners para botones
-  nextBtn?.addEventListener('click', function(e) {
-    e.preventDefault();
+  nextButton.addEventListener('click', () => {
+    stopSlideInterval();
     nextSlide();
-    startAutoSlide();
+    startSlideInterval();
   });
 
-  prevBtn?.addEventListener('click', function(e) {
-    e.preventDefault();
+  prevButton.addEventListener('click', () => {
+    stopSlideInterval();
     prevSlide();
-    startAutoSlide();
+    startSlideInterval();
   });
 
-  // Touch events para móviles
-  let touchStartX = 0;
-  
-  track.addEventListener('touchstart', function(e) {
-    touchStartX = e.touches[0].clientX;
-    stopAutoSlide();
-  }, { passive: true });
+  // Swipe support
+  let startX = 0;
+  let endX = 0;
+  track.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+  });
 
-  track.addEventListener('touchend', function(e) {
-    const touchEndX = e.changedTouches[0].clientX;
-    const diff = touchStartX - touchEndX;
-    
-    if (diff > 50) nextSlide(); // Swipe izquierda
-    if (diff < -50) prevSlide(); // Swipe derecha
-    
-    startAutoSlide();
-  }, { passive: true });
+  track.addEventListener('touchend', (e) => {
+    endX = e.changedTouches[0].clientX;
+    handleSwipe();
+  });
 
-  // Pausar al interactuar
-  track.addEventListener('mouseenter', stopAutoSlide);
-  track.addEventListener('mouseleave', startAutoSlide);
+  function handleSwipe() {
+    const threshold = 50;
+    if (startX - endX > threshold) {
+      stopSlideInterval();
+      nextSlide();
+      startSlideInterval();
+    } else if (endX - startX > threshold) {
+      stopSlideInterval();
+      prevSlide();
+      startSlideInterval();
+    }
+  }
 
-  // Inicialización
-  initCarousel();
-  startAutoSlide();
+  // Inicializar
+  showSlide(currentSlide);
+  startSlideInterval();
 });

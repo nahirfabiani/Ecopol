@@ -62,7 +62,7 @@
               <span>Ecopol Analytica</span>
                </h2>
               <br>
-              <h1>Consultoría para organizaciones que hacen.
+              <h1>Consultoría para organizaciones<br>que hacen.
             </h1>
             <p class="info-text">
               Resolvemos problemas públicos de forma efectiva, 
@@ -81,18 +81,21 @@
     <h1 class="main-heading" style="text-align:center;">Sobre Nosotros</h1>
 
   </section>
-    <section class="carousel-section" aria-live="polite">
+  <section class="carousel-section" aria-live="polite">
   <div class="carousel-container">
-    <div class="carousel-track">
-       <button class="carousel-btn prev-btn" aria-label="Slide anterior">
+    
+    <!-- Botones fuera del track -->
+    <button class="carousel-btn prev-btn" aria-label="Slide anterior">
       <i class="ri-arrow-left-s-line"></i>
     </button>
+
+    <div class="carousel-track">
       <div class="carousel-slide active">
         <i class="ri-bar-chart-line icon"></i>
         <div class="slide-content">
           <p>Somos una consultora política y territorial conformada 
-            por un equipo interdisciplinario con amplia experiencia en el diseño y e
-            jecución de políticas públicas, campañas electorales, auditorías técnicas y 
+            por un equipo interdisciplinario con amplia experiencia en el diseño y 
+            ejecución de políticas públicas, campañas electorales, auditorías técnicas y 
             estrategias de comunicación pública.</p>
         </div>
         <div class="progress-bar"></div>
@@ -119,16 +122,19 @@
         <div class="progress-bar"></div>
       </div>
     </div>
+
+    <!-- Botón siguiente -->
     <button class="carousel-btn next-btn" aria-label="Slide siguiente">
       <i class="ri-arrow-right-s-line"></i>
     </button>
+    
   </div>
 </section>
 
 <!-- Sección Servicios -->
 <section class="wrapper" id="servicios">
   <div class="container" data-aos="fade-up" data-aos-duration="1000">
-    <h1 class="main-heading" style="text-align:center;">Área Prevención vial</h1>
+    <h1 class="main-heading" style="text-align:center;">Servicios<br>Área prevención vial </h1>
     <br>
     <div class="grid-cols-2">
       <div class="grid-col-item">
@@ -175,7 +181,7 @@
     <form id="contactForm" action="https://formsubmit.co/contacto@ecopolanalytica.com" method="POST">
       <!-- Opcionales: configuración de FormSubmit -->
       <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="https://ecopolanalytica.com/gracias.html" value="https://ecopolanalytica.com/gracias.html">
+      <input type="hidden" name="_next" value="https://ecopolanalytica.com/gracias.html">
 
       <div class="form-group">
         <label for="name">Nombre</label>
@@ -186,7 +192,10 @@
         <label for="email">Correo electrónico</label>
         <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" required>
       </div>
-
+      <div class="form-group">
+        <label for="name">Teléfono</label>
+        <input type="number" id="Teléfono" name="Teléfono" placeholder="011" required>
+      </div>
       <div class="form-group">
         <label for="message">Mensaje</label>
         <textarea id="message" name="message" rows="5" placeholder="Escribí tu mensaje..." required></textarea>
