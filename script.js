@@ -29,6 +29,18 @@ gsap.from(".info-text", { opacity: 0, y: 20, delay: 2.8, duration: 1 });
 gsap.from(".team_img_wrapper img", { opacity: 0, y: 20, delay: 3, duration: 1 });
 gsap.from("#nosotros", { opacity: 0, y: 60, duration: 1.2, ease: "power2.out", delay: 0.5 });
 
+// GSAP animación para el main heading
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.gsap) {
+    gsap.from(".main-heading", {
+      opacity: 0,
+      x: -60,
+      duration: 1,
+      ease: "power2.out"
+    });
+  }
+});
+
 // ==== FORMULARIO ==== 
 const contactForm = document.getElementById('contactForm');
 
@@ -121,3 +133,17 @@ document.addEventListener('DOMContentLoaded', () => {
   showSlide(currentSlide);
   startSlideInterval();
 });
+// ==== EFECTO DE TEXTO FUTURISTA EN main heading ====
+const heroText = document.querySelector('.main heading h2');
+const text = heroText.textContent;
+heroText.textContent = '';
+
+let index = 0;
+function typeEffect() {
+  if (index < text.length) {
+    heroText.textContent += text.charAt(index);
+    index++;
+    setTimeout(typeEffect, 80); // velocidad de escritura
+  }
+}
+typeEffect();
