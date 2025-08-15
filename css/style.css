@@ -530,7 +530,7 @@ form .btn {
 
   .main-heading {
     font-size: 2rem;
-    text-align: center;
+    text-align: left;
   }
 
   .main-heading span {
@@ -538,7 +538,7 @@ form .btn {
   }
 
   .info-text {
-    text-align: center;
+    text-align: left;
   }
 
   .nav_menu {
