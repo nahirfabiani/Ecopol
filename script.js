@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
   startSlideInterval();
 });
 // ==== EFECTO DE TEXTO FUTURISTA EN main heading ====
-const heroText = document.querySelector('.main heading h2');
+const heroText = document.querySelector('.hero-text');
 const text = heroText.textContent;
 heroText.textContent = '';
 
