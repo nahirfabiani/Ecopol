@@ -463,7 +463,7 @@ form .btn {
   align-items: center;
 }
 
-/* Servicios: apilar items uno abajo del otro */
+/* Servicios*/
 .servicios-list {
   display: flex;
   flex-direction: column;
@@ -499,6 +499,9 @@ form .btn {
 
 .servicios-list .featured_info {
   flex: 1;
+}
+.servicios-list p {
+  text-align: justify !important;
 }
 
 @media (max-width: 700px) {
@@ -546,8 +549,8 @@ form .btn {
     top: 0;
     right: -100%;
     background-color: white;
-    height: 100vh;
-    width: 250px;
+    height: 50vh;
+    width: 150px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -625,3 +628,112 @@ form .btn {
     height: auto;
     padding: 2rem 0;
   }}
+
+@media (max-width: 768px) {
+  .grid-cols-2,
+  .grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .main-heading {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .main-heading span {
+    font-size: 2.2rem;
+  }
+
+  .info-text {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  /* Navbar móvil */
+  .nav_menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+   height: 50vh;
+    width: 150px;
+    background: #fff;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: right 0.3s ease-in-out;
+    z-index: 999;
+  }
+
+  .nav_menu.show {
+    right: 0;
+  }
+
+  .nav_menu_list {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .toggle_btn {
+    display: block;
+    font-size: 1.8rem;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+
+  .logo img {
+    height: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content {
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero-text-wrapper {
+    margin: 0;
+    max-width: 100%;
+  }
+
+  .hero-text-wrapper .main-heading {
+    font-size: 1.5rem;
+  }
+
+  .hero-text-wrapper .info-text {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+
+  /* Navbar más compacto */
+  .nav_menu {
+    height: 50vh;
+    width: 150px;
+  }
+
+  .nav_menu_list {
+    gap: 1rem;
+  }
+
+  .logo img {
+    height: 40px;
+  }
+
+  .logo h2 {
+    font-size: 0.9rem;
+  }
+
+  /* Carousel más compacto */
+  .carousel-slide {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .carousel-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+}
