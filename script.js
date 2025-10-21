@@ -254,12 +254,18 @@ function closeThanksModal() {
 // Función global para mostrar modal después del envío
 window.showThanksModal = function() {
   document.getElementById('thanksModal').style.display = 'flex';
-  // Limpiar formulario después de mostrar modal
-  setTimeout(() => {
-    const form = document.getElementById('contactForm');
-    if (form) form.reset();
-  }, 100);
 };
+
+// Detectar si se regresa de FormSubmit y mostrar modal
+window.addEventListener('load', function() {
+  if (window.location.hash === '#gracias') {
+    setTimeout(() => {
+      showThanksModal();
+      // Limpiar el hash de la URL
+      history.replaceState(null, null, window.location.pathname);
+    }, 500);
+  }
+});
 
 // Cerrar modal con ESC
 document.addEventListener('keydown', function(e) {
