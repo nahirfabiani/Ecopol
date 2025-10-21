@@ -47,9 +47,9 @@
       <!-- ==== NAVBAR ==== -->
       <nav class="nav">
         <div class="logo">
-  <img src="./img/logo.png" alt="Ecopol Analytica - Consultoría Política y Territorial">
-  <br><h2 style="display:inline-block; vertical-align:middle;">Ecopol Analytica</h2>
-</div>
+          <img src="./img/logo.png" alt="Ecopol Analytica - Consultoría Política y Territorial">
+          <h2>Ecopol Analytica</h2>
+        </div>
         <div class="nav_menu" id="nav_menu">
           <button class="close_btn" id="close_btn">
             <i class="ri-close-fill"></i>
@@ -79,21 +79,21 @@
     </header>
 
     <!-- ==== HERO SECTION ==== -->
-<section class="hero-content">
-  <div class="hero-text-wrapper">
-    <h2 class="main-heading">Consultoría para organizaciones que hacen.</h2>
-    <p class="info-text">
-      Resolvemos problemas públicos de forma efectiva, generando intervenciones ágiles, basadas en evidencia y con impacto visible.
-    </p>
-  </div>
-</section>
+    <section class="hero-content">
+      <div class="hero-text-wrapper">
+        <h1 class="main-heading">Consultoría para <span>organizaciones que hacen</span></h1>
+        <p class="info-text">
+          Resolvemos problemas públicos de forma efectiva, generando intervenciones ágiles, basadas en evidencia y con impacto visible.
+        </p>
+      </div>
+    </section>
 
 <div class="divider centered-divider"></div>
 
 
-  <section class="carousel-section" id="nosotros" aria-live="polite">
-  <div class="carousel-container">
-    <h1 class="main-heading" style="text-align:center;">Sobre Nosotros</h1>
+    <section class="carousel-section" id="nosotros" aria-live="polite">
+      <div class="carousel-container">
+        <h2 class="main-heading" style="text-align:center;">Sobre Nosotros</h2>
     <div class="carousel-track">
       <div class="carousel-slide active">
         <i class="ri-bar-chart-line icon"></i>
@@ -128,18 +128,19 @@
         <div class="progress-bar"></div>
       </div>
     </div>
-<div class="carousel-buttons">
-  <button class="carousel-btn prev-btn">&#10094;</button>
-  <button class="carousel-btn next-btn">&#10095;</button>
-</div>
-  </div>
-</section>
+        <div class="carousel-buttons">
+          <button class="carousel-btn prev-btn" aria-label="Anterior">&#10094;</button>
+          <button class="carousel-btn next-btn" aria-label="Siguiente">&#10095;</button>
+        </div>
+      </div>
+    </section>
 <div class="divider centered-divider"></div>
 
-<!-- Sección Servicios -->
-<section class="wrapper" id="servicios">
-  <div class="container" data-aos="fade-up" data-aos-duration="1000">
-    <h1 class="main-heading" style="text-align:center;">Servicios<br><br>Capacitación Integral en Boleta Única de Papel</h1>
+    <!-- Sección Servicios -->
+    <section class="wrapper" id="servicios">
+      <div class="container" data-aos="fade-up" data-aos-duration="1000">
+        <h2 class="main-heading" style="text-align:center;">Servicios</h2>
+        <h3 class="main-heading" style="text-align:center; font-size: 1.8rem; margin-top: 2rem;">Capacitación Integral en Boleta Única de Papel</h3>
     <br>
     <div class="servicios-list">
       <div class="grid-col-item">
@@ -177,7 +178,7 @@
       </div>
     </div>
     <br>
-  <h1 class="main-heading" style="text-align:center;">Área seguridad vial</h1>
+        <h3 class="main-heading" style="text-align:center; font-size: 1.8rem; margin-top: 3rem;">Área seguridad vial</h3>
     <br>
     <div class="servicios-list">
       <div class="grid-col-item">
@@ -210,21 +211,21 @@
           </p>
         </div>
       </div>
-    </div>
-</section>
-<div class="divider centered-divider"></div>
+      </div>
+    </section>
+    
+    <div class="divider centered-divider"></div>
 
-<!-- Sección Contacto -->
-<section id="contacto" class="wrapper">
-  <div class="container">
-    <h2 class="main-heading">Contacto</h2>
-    <p class="info-text">Dejanos tu consulta y te responderemos a la brevedad.</p>
+    <!-- Sección Contacto -->
+    <section id="contacto" class="wrapper">
+      <div class="container">
+        <h2 class="main-heading">Contacto</h2>
+        <p class="info-text">Dejanos tu consulta y te responderemos a la brevedad.</p>
 
     <form id="contactForm" action="https://formsubmit.co/contacto@ecopolanalytica.com" method="POST">
       <!-- Opcionales: configuración de FormSubmit -->
       <input type="hidden" name="_captcha" value="false">
-     
- <input type="hidden" name="_next" value="https://ecopolanalytica.com/Gracias.html">
+      <input type="hidden" name="_next" value="#">
       <div class="form-group">
         <label for="name">Nombre</label>
         <input type="text" id="name" name="name" placeholder="Tu nombre" required>
@@ -244,9 +245,9 @@
       </div>
 
       <button type="submit" class="btn">Enviar</button>
-    </form>
-  </div>
-</section>
+        </form>
+      </div>
+    </section>
 
 
     <!-- Footer  -->
@@ -272,3 +273,14 @@
     <!-- ==== SCRIPT.JS ==== -->
     <script src="./script.js" defer></script>
     <script>
+    <!-- Modal de Agradecimiento -->
+    <div id="thanksModal" class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <i class="ri-check-line modal-icon"></i>
+          <h3>¡Gracias por tu mensaje!</h3>
+        </div>
+        <p>Nos contactaremos a la brevedad</p>
+        <button class="modal-btn" onclick="closeThanksModal()">Cerrar</button>
+      </div>
+    </div>

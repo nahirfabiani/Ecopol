@@ -1,8 +1,10 @@
-// ==== NAVBAR TOGGLE ==== 
-const navId = document.getElementById("nav_menu"),
-  ToggleBtnId = document.getElementById("toggle_btn"),
-  CloseBtnId = document.getElementById("close_btn");
+// ==== NAVBAR TOGGLE & SCROLL EFFECTS ==== 
+const navId = document.getElementById("nav_menu");
+const ToggleBtnId = document.getElementById("toggle_btn");
+const CloseBtnId = document.getElementById("close_btn");
+const header = document.querySelector('.header');
 
+// Mobile menu toggle
 ToggleBtnId?.addEventListener("click", () => {
   navId.classList.add("active");
 });
@@ -11,38 +13,82 @@ CloseBtnId?.addEventListener("click", () => {
   navId.classList.remove("active");
 });
 
-// ==== ANIMATE ON SCROLL INIT ==== 
-AOS.init();
-
-// ==== GSAP ANIMACIONES ==== 
-gsap.from(".logo", { opacity: 0, y: -10, delay: 1, duration: 0.5 });
-gsap.from(".nav_menu_list .nav_menu_item", {
-  opacity: 0,
-  y: -10,
-  delay: 1.4,
-  duration: 0.5,
-  stagger: 0.3,
-});
-gsap.from(".toggle_btn", { opacity: 0, y: -10, delay: 1.4, duration: 0.5 });
-gsap.from(".main-heading", { opacity: 0, y: 20, delay: 2.4, duration: 1 });
-gsap.from(".info-text", { opacity: 0, y: 20, delay: 2.8, duration: 1 });
-gsap.from(".team_img_wrapper img", { opacity: 0, y: 20, delay: 3, duration: 1 });
-gsap.from("#nosotros", { opacity: 0, y: 60, duration: 1.2, ease: "power2.out", delay: 0.5 });
-
-// GSAP animación para el main heading
-document.addEventListener('DOMContentLoaded', function() {
-  if (window.gsap) {
-    gsap.from(".main-heading", {
-      opacity: 0,
-      x: -60,
-      duration: 1,
-      ease: "power2.out"
-    });
+// Header scroll effect
+let lastScrollY = window.scrollY;
+window.addEventListener('scroll', () => {
+  const currentScrollY = window.scrollY;
+  
+  if (currentScrollY > 100) {
+    header.style.background = 'rgba(255, 255, 255, 0.95)';
+    header.style.backdropFilter = 'blur(20px)';
+  } else {
+    header.style.background = 'rgba(255, 255, 255, 0.95)';
+    header.style.backdropFilter = 'blur(10px)';
   }
+  
+  lastScrollY = currentScrollY;
 });
 
-// ==== FORMULARIO ==== 
+// ==== ANIMATE ON SCROLL INIT ==== 
+AOS.init({
+  duration: 800,
+  easing: 'ease-out-cubic',
+  once: true,
+  offset: 100
+});
+
+// ==== GSAP ANIMACIONES MEJORADAS ==== 
+if (typeof gsap !== 'undefined') {
+  // Animaciones de entrada suaves
+  gsap.from(".logo", { 
+    opacity: 0, 
+    y: -20, 
+    duration: 0.8, 
+    ease: "power2.out" 
+  });
+  
+  gsap.from(".nav_menu_list .nav_menu_item", {
+    opacity: 0,
+    y: -15,
+    duration: 0.6,
+    stagger: 0.1,
+    delay: 0.2,
+    ease: "power2.out"
+  });
+  
+  gsap.from(".hero-text-wrapper .main-heading", { 
+    opacity: 0, 
+    y: 30, 
+    duration: 1, 
+    delay: 0.5,
+    ease: "power2.out" 
+  });
+  
+  gsap.from(".hero-text-wrapper .info-text", { 
+    opacity: 0, 
+    y: 20, 
+    duration: 0.8, 
+    delay: 0.8,
+    ease: "power2.out" 
+  });
+}
+
+// ==== FORMULARIO CON VALIDACIÓN MEJORADA ==== 
 const contactForm = document.getElementById('contactForm');
+const formInputs = contactForm?.querySelectorAll('input, textarea');
+
+// Efectos de focus en inputs
+formInputs?.forEach(input => {
+  input.addEventListener('focus', function() {
+    this.parentElement.classList.add('focused');
+  });
+  
+  input.addEventListener('blur', function() {
+    if (!this.value) {
+      this.parentElement.classList.remove('focused');
+    }
+  });
+});
 
 // ==== CAROUSEL ==== 
 document.addEventListener('DOMContentLoaded', () => {
@@ -133,18 +179,113 @@ document.addEventListener('DOMContentLoaded', () => {
   showSlide(currentSlide);
   startSlideInterval();
 });
-// ==== EFECTO DE TEXTO FUTURISTA EN main heading ====
-const heroText = document.querySelector('.hero-text');
-const text = heroText.textContent;
-heroText.textContent = '';
+// ==== EFECTOS ADICIONALES ====
 
-let index = 0;
-function typeEffect() {
-  if (index < text.length) {
-    heroText.textContent += text.charAt(index);
-    index++;
-    setTimeout(typeEffect, 80); // velocidad de escritura
+// Smooth scroll para navegación
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
+// Parallax sutil en hero
+window.addEventListener('scroll', () => {
+  const scrolled = window.pageYOffset;
+  const heroContent = document.querySelector('.hero-content');
+  if (heroContent) {
+    heroContent.style.transform = `translateY(${scrolled * 0.1}px)`;
   }
+});
+
+// Intersection Observer para animaciones
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('animate-in');
+    }
+  });
+}, observerOptions);
+
+// Observar elementos para animación
+document.querySelectorAll('.servicios-list .grid-col-item').forEach(el => {
+  observer.observe(el);
+});
+
+// Efecto de typing en el hero (más sutil)
+const heroHeading = document.querySelector('.hero-text-wrapper .main-heading');
+if (heroHeading) {
+  const text = heroHeading.textContent;
+  heroHeading.textContent = '';
+  heroHeading.style.borderRight = '2px solid #6366f1';
+  
+  let i = 0;
+  function typeWriter() {
+    if (i < text.length) {
+      heroHeading.textContent += text.charAt(i);
+      i++;
+      setTimeout(typeWriter, 50);
+    } else {
+      setTimeout(() => {
+        heroHeading.style.borderRight = 'none';
+      }, 1000);
+    }
+  }
+  
+  setTimeout(typeWriter, 1000);
 }
-typeEffect();
+
+// ==== MODAL DE AGRADECIMIENTO ====
+function showThanksModal() {
+  document.getElementById('thanksModal').style.display = 'flex';
+}
+
+function closeThanksModal() {
+  document.getElementById('thanksModal').style.display = 'none';
+}
+
+// Interceptar envío del formulario
+contactForm?.addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  // Enviar formulario
+  fetch(this.action, {
+    method: 'POST',
+    body: new FormData(this)
+  }).then(() => {
+    // Mostrar modal de agradecimiento
+    showThanksModal();
+    // Limpiar formulario
+    this.reset();
+  }).catch(() => {
+    // En caso de error, mostrar el modal igual
+    showThanksModal();
+    this.reset();
+  });
+});
+
+// Cerrar modal con ESC
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeThanksModal();
+  }
+});
+
+// Cerrar modal al hacer click fuera
+document.getElementById('thanksModal')?.addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeThanksModal();
+  }
+});
 
