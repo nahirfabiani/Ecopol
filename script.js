@@ -247,33 +247,19 @@ if (heroHeading) {
 }
 
 // ==== MODAL DE AGRADECIMIENTO ====
-function showThanksModal() {
-  document.getElementById('thanksModal').style.display = 'flex';
-}
-
 function closeThanksModal() {
   document.getElementById('thanksModal').style.display = 'none';
 }
 
-// Interceptar envío del formulario
-contactForm?.addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  // Enviar formulario
-  fetch(this.action, {
-    method: 'POST',
-    body: new FormData(this)
-  }).then(() => {
-    // Mostrar modal de agradecimiento
-    showThanksModal();
-    // Limpiar formulario
-    this.reset();
-  }).catch(() => {
-    // En caso de error, mostrar el modal igual
-    showThanksModal();
-    this.reset();
-  });
-});
+// Función global para mostrar modal después del envío
+window.showThanksModal = function() {
+  document.getElementById('thanksModal').style.display = 'flex';
+  // Limpiar formulario después de mostrar modal
+  setTimeout(() => {
+    const form = document.getElementById('contactForm');
+    if (form) form.reset();
+  }, 100);
+};
 
 // Cerrar modal con ESC
 document.addEventListener('keydown', function(e) {
